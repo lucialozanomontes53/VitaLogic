@@ -1,0 +1,21 @@
+@reference "../../assets/style.css";
+
+.history-container {
+  @apply bg-vital-bg rounded-[2.5rem] p-6 mb-8 shadow-sm;
+}
+
+.history-header {
+  @apply flex items-center justify-between px-2;
+}
+
+.history-title {
+  @apply text-vital-blue font-bold mb-6;
+}
+
+.history-add-icon {
+  @apply text-vital-blue font-bold mb-6 cursor-pointer hover:scale-110 transition-transform;
+}
+
+.history-grid {
+  @apply grid grid-cols-2 gap-3;
+}

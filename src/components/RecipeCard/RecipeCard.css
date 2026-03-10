@@ -1,0 +1,30 @@
+@reference "../../assets/style.css";
+
+.recipe-card {
+  @apply bg-vital-teal rounded-[2rem] p-4 shadow-sm text-white text-center transition-transform hover:scale-[1.02];
+  width: 100%;
+}
+
+.recipe-title {
+  @apply text-[13px] font-bold leading-tight mb-2 mt-1;
+}
+
+.recipe-user {
+  @apply text-[10px] font-normal opacity-90 italic mb-4;
+}
+
+.macro-mini-container {
+  @apply flex justify-center items-center gap-2 mb-1;
+}
+
+.macro-point {
+  @apply w-2.5 h-2.5 rounded-full;
+}
+
+.bg-protein { @apply bg-vital-dark; }
+.bg-carbs { @apply bg-[#f2e6b1]; }
+.bg-veggies { @apply bg-[#8fb695]; }
+
+.macro-label-mini {
+  @apply text-[7px] font-bold uppercase mr-1;
+}

@@ -1,0 +1,19 @@
+@reference "../../assets/style.css";
+
+.family-container {
+  @apply bg-vital-bg rounded-[2.5rem] p-8 mb-8 shadow-sm;
+}
+
+.family-title {
+  @apply text-center text-vital-blue font-bold mb-6;
+}
+
+.family-grid {
+  @apply flex justify-between items-center gap-2 px-2;
+}
+
+.user-avatar {
+  @apply w-14 h-12 rounded-full bg-vital-teal flex items-center justify-center 
+         text-white text-[10px] font-bold
+         cursor-pointer active:scale-95 transition-all;
+}
