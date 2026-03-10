@@ -1,48 +1,65 @@
-# VitaLogic
+# 🥗 Vitalogic - Smart Nutrition Assistant
 
-This template should help get you started developing with Vue 3 in Vite.
+![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
+![Pinia](https://img.shields.io/badge/Pinia-yellow?style=for-the-badge&logo=pinia&logoColor=black)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 
-## Recommended IDE Setup
+**Vitalogic** is a modern nutrition management application designed to bridge the gap between Figma designs and a high-performance web experience. It helps users manage their kitchen inventory, track macros, and maintain a healthy lifestyle through a clean, card-based interface.
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## ✨ Features
 
-## Recommended Browser Setup
+- 👤 **Persistent Authentication:** Custom login system integrated with Pinia and `localStorage`. Your session stays active even after a refresh.
+- 👨‍👩‍👧‍👦 **Family Profile Selector:** Seamlessly switch between family members to personalize meal tracking.
+- 🥘 **Recipe History Grid:** A beautifully organized 2x2 grid displaying recent meals with quick-glance macro indicators (Proteins, Carbs, and Greens).
+- 📱 **Atomic Design:** Built with a component-driven architecture, ensuring styles are scoped and maintainable.
+- 🎨 **Tailwind 4 Engine:** Utilizing the latest CSS-first configuration for lightning-fast styling and a unified design system.
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
 
-## Type Support for `.vue` Imports in TS
+## 🛠️ Tech Stack
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+- **Framework:** [Vue 3](https://vuejs.org/) (Composition API)
+- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) (using the new `@theme` and `@reference` engine)
+- **State Management:** [Pinia](https://pinia.vuejs.org/)
+- **Routing:** [Vue Router](https://router.vuejs.org/) (with Navigation Guards for auth protection)
+- **Build Tool:** [Vite](https://vitejs.dev/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
 
-## Customize configuration
 
-See [Vite Configuration Reference](https://vite.dev/config/).
 
-## Project Setup
+## 📂 Project Structure
 
-```sh
-npm install
+The project follows a "Clean Component" pattern where each component manages its own logic and dedicated CSS file:
+
+```text
+src/
+ ├── assets/          # Global styles & Tailwind 4 theme definitions
+ ├── components/      # Atomic UI components
+ │    └── [Name]/
+ │         ├── [Name].vue    # Template & Logic
+ │         └── [Name].css    # Scoped Tailwind 4 Styles
+ ├── stores/          # Pinia stores (User, Fridge, Recipes)
+ ├── views/           # Page-level components (Home, Login)
+ └── router/          # Routing config & Security Guards
 ```
 
-### Compile and Hot-Reload for Development
 
-```sh
-npm run dev
-```
 
-### Type-Check, Compile and Minify for Production
+## 🎨 Design System
 
-```sh
-npm run build
-```
+The UI follows a specific color palette extracted from professional Figma prototypes:
+ColorHexRoleVital Blue#1A3A5AHeaders & Primary TextVital Teal#1A7A8AMain Cards & AccentsVital Dark#0F2944Buttons & Macro BadgesVital Gray#D9D9D9Section Backgrounds
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+## 🚀 Getting Started
+### Prerequisites:
+- Node.js (Latest LTS recommended)
+- npm or yarn
+### Installation:
+- Clone the repository: git clone [https://github.com/your-username/vitalogic.git](https://github.com/your-username/vitalogic.git)
+- Install dependencies: npm install
+- Start the development server: npm run dev
+## 📝 License
+Distributed under the MIT License. See LICENSE for more information.
 
-```sh
-npm run test:unit
-```
+#### Developed with ❤️ by Lucia
