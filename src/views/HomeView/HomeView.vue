@@ -1,34 +1,45 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
 import FamilySelector from '../../components/FamilySelector/FamilySelector.vue'
 import RecipeHistory from '../../components/RecipeHistory/RecipeHistory.vue'
+import { useUserStore } from '../../stores/userAuthentification'
 
-const nombreUsuario = 'Lucia' 
+import './HomeView.css'
+
+const userStore = useUserStore()
+const router = useRouter()
 const numIngredientes = 12
+
+const handleLogout = () => {
+  userStore.logout()
+  router.push({ name: 'login' })
+}
 </script>
 
 <template>
-  <main class="min-h-screen bg-white p-6 pb-24 font-sans max-w-md mx-auto overflow-x-hidden">
+  <main class="home-main-container">
     
-    <h1 class="text-4xl font-bold text-[--color-vital-blue] text-center mt-4 mb-10">
-      Vitalogic
-    </h1>
+    <header class="home-header">
+      <h1 class="home-title">Vitalogic</h1>
+
+      <button @click="handleLogout" class="logout-icon-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+          <line x1="12" y1="2" x2="12" y2="12"></line>
+        </svg>
+      </button>
+    </header>
 
     <div class="mb-4">
-      <p class="text-2xl font-bold text-[--color-vital-blue]">
-        Hola, {{ nombreUsuario }} 👋
-      </p>
+      <p class="welcome-text">Hola, {{ userStore.name }} 👋</p>
     </div>
 
-    <button class="w-full bg-vital-dark text-white py-4 rounded-2xl font-bold mb-8 shadow-md active:scale-95 transition-transform">
+    <button class="ingredients-banner-btn">
       Tienes {{ numIngredientes }} ingredientes en casa
     </button>
 
     <FamilySelector />
-
     <RecipeHistory />
 
-    <button class="fixed bottom-10 right-8 w-13 h-13 bg-vital-dark rounded-full text-white text-3xl flex items-center justify-center">
-      +
-    </button>
   </main>
 </template>

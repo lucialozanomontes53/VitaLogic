@@ -1,0 +1,31 @@
+/* HomeView.css */
+@reference "../../assets/style.css";
+
+.home-main-container {
+  @apply min-h-screen p-6 pb-24 font-sans max-w-md mx-auto overflow-x-hidden;
+}
+
+.home-header {
+  @apply relative flex items-center justify-center mt-4 mb-10 w-full;
+}
+
+.home-title {
+  @apply text-4xl font-bold text-[--color-vital-blue];
+}
+
+.logout-icon-btn {
+  @apply absolute right-0 text-[--color-vital-blue] active:scale-90 transition-transform p-1 mt-3;
+}
+
+.welcome-text {
+  @apply text-2xl font-bold text-[--color-vital-blue];
+}
+
+.ingredients-banner-btn {
+  @apply w-full text-white py-4 rounded-2xl font-bold mb-8 shadow-md active:scale-95 transition-transform;
+  background-color: #002855; /* El color de Vitalogic */
+}
+
+.history-container {
+  @apply mt-8;
+}

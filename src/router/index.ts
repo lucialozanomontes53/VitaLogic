@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useUserStore } from '@/stores/loginUsers'
+import { useUserStore } from '@/stores/userAuthentification'
 import HomeView from '../views/HomeView/HomeView.vue'
 import LoginView from '../views/LoginView/LoginView.vue'
 
@@ -10,19 +10,19 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: LoginView,
-      meta: { requiresAuth: false }
+      meta: { requiresAuth: false },
     },
     {
       path: '/',
       name: 'home',
       component: HomeView,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true },
     },
     {
       path: '/:pathMatch(.*)*',
-      redirect: '/'
-    }
-  ]
+      redirect: '/',
+    },
+  ],
 })
 
 /**
@@ -33,11 +33,9 @@ router.beforeEach((to, from, next) => {
 
   if (to.meta.requiresAuth && !userStore.name) {
     next({ name: 'login' })
-  } 
-  else if (to.name === 'login' && userStore.name) {
+  } else if (to.name === 'login' && userStore.name) {
     next({ name: 'home' })
-  } 
-  else {
+  } else {
     next()
   }
 })
