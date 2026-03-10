@@ -49,7 +49,12 @@ src/
 ## 🎨 Design System
 
 The UI follows a specific color palette extracted from professional Figma prototypes:
-ColorHexRoleVital Blue#1A3A5AHeaders & Primary TextVital Teal#1A7A8AMain Cards & AccentsVital Dark#0F2944Buttons & Macro BadgesVital Gray#D9D9D9Section Backgrounds
+| Color | Hex | Role |
+| :--- | :--- | :--- |
+| **Vital Blue** | `#1A3A5A` | Headers & Primary Text |
+| **Vital Teal** | `#1A7A8A` | Main Cards & Accents |
+| **Vital Dark** | `#0F2944` | Buttons & Macro Badges |
+| **Vital Gray** | `#D9D9D9` | Section Backgrounds |
 
 ## 🚀 Getting Started
 ### Prerequisites:
