@@ -1,0 +1,7 @@
+{
+  "name": "nutrihome",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
