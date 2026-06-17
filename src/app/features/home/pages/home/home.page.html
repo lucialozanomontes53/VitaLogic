@@ -1,0 +1,123 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>VitaLogic</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="logout()">
+        <ion-icon slot="icon-only" name="power-outline" />
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="home-content">
+
+  @if (fabOpen()) {
+    <div class="fab-backdrop" (click)="closeFab()"></div>
+  }
+
+  <div class="page-body">
+
+    <p class="greeting">Hola, {{ userName }} 👋</p>
+
+    <div class="ingredient-banner">
+      Tienes {{ homeStore.ingredientCount() }} ingredientes en casa
+    </div>
+
+    <!-- Selector de familia -->
+    <div class="section-card">
+      <p class="section-subtitle">¿Para quién cocinamos hoy?</p>
+
+      @if (homeStore.loading()) {
+        <div class="center-spinner"><ion-spinner name="crescent" /></div>
+      } @else {
+        <div class="member-row">
+          @for (member of homeStore.familyProfiles(); track member.id) {
+            <div class="member-wrap">
+              <button
+                class="member-chip"
+                [class.selected]="selectedMember() === member.id"
+                (click)="selectMember(member.id)"
+              >
+                {{ member.name.slice(0, 4) }}
+              </button>
+              <button class="member-remove" (click)="removeMember(member.id, $event)">×</button>
+            </div>
+          }
+          <button
+            class="member-chip"
+            [class.selected]="selectedMember() === 'all'"
+            (click)="selectMember('all')"
+          >
+            All
+          </button>
+          <button class="member-add" (click)="openAddMember()">+</button>
+        </div>
+      }
+    </div>
+
+    <!-- Historial de recetas -->
+    <div class="section-card">
+      <div class="section-header">
+        <span class="section-title">Historial de recetas</span>
+        <button class="section-add-btn" (click)="goToHistory()">+</button>
+      </div>
+
+      @if (historyStore.loading()) {
+        <div class="center-spinner"><ion-spinner name="crescent" /></div>
+      } @else if (recentRecipes.length === 0) {
+        <p class="empty-msg">Aún no hay recetas. ¡Añade la primera!</p>
+      } @else {
+        <div class="recipe-grid">
+          @for (recipe of recentRecipes; track recipe.id) {
+            <div class="recipe-card">
+              <p class="recipe-name">{{ recipe.name }}</p>
+              <p class="recipe-for">Para: {{ recipe.cookedForName || 'Todos' }}</p>
+              <div class="macro-row">
+                <span class="macro-dot prot">PROT</span>
+                <span class="macro-dot carb">CARB</span>
+                <span class="macro-dot verd">VERD</span>
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+
+  </div>
+
+  <!-- FAB -->
+  <div class="fab-container">
+    @if (fabOpen()) {
+      <div class="fab-menu">
+        <button class="fab-option navy" (click)="goToShoppingList()">☑ Lista de la compra</button>
+        <button class="fab-option teal" (click)="goToFridge()">🔥 Nevera</button>
+      </div>
+    }
+    <button class="fab-main" (click)="toggleFab()">
+      <ion-icon name="add-outline" />
+    </button>
+  </div>
+
+</ion-content>
+
+<!-- Modal añadir miembro -->
+@if (showAddMember()) {
+  <div class="modal-backdrop" (click)="closeAddMember()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <span class="modal-title">Añadir miembro</span>
+        <button class="modal-close" (click)="closeAddMember()">
+          <ion-icon name="close-outline" />
+        </button>
+      </div>
+      <input
+        class="modal-input"
+        type="text"
+        placeholder="Nombre"
+        [(ngModel)]="newMemberName"
+        (keyup.enter)="addMember()"
+      />
+      <button class="modal-submit" (click)="addMember()">Añadir</button>
+    </div>
+  </div>
+}
