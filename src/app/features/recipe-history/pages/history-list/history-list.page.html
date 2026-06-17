@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text="" />
+    </ion-buttons>
+    <ion-title>VitaLogic</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="history-content">
+  <div class="page-body">
+
+    <h2 class="page-title">Historial de recetas</h2>
+
+    @if (store.loading()) {
+      <div class="center-spinner"><ion-spinner name="crescent" /></div>
+    } @else if (store.recipes().length === 0) {
+      <p class="empty-msg">Aún no hay recetas. ¡Añade la primera!</p>
+    } @else {
+      <div class="recipe-list">
+        @for (recipe of store.recipes(); track recipe.id) {
+          <div class="recipe-card">
+            <div class="card-header">
+              <p class="recipe-name">{{ recipe.name }}</p>
+              <button class="delete-btn" (click)="remove(recipe.id)">
+                <ion-icon name="trash-outline" />
+              </button>
+            </div>
+
+            <div class="macro-line">
+              <span class="macro-circle prot"></span>
+              <span class="macro-text">PROTEÍNAS - {{ recipe.macros.proteinsG }}g</span>
+            </div>
+            <div class="macro-line">
+              <span class="macro-circle carb"></span>
+              <span class="macro-text">CARBOHIDRATOS - {{ recipe.macros.carbsG }}g</span>
+            </div>
+            <div class="macro-line">
+              <span class="macro-circle verd"></span>
+              <span class="macro-text">VERDURAS - {{ recipe.macros.vegetablesG }}g</span>
+            </div>
+
+            <p class="cooked-for">Cocinado para: {{ recipe.cookedForName }}</p>
+          </div>
+        }
+      </div>
+    }
+
+  </div>
+
+  <button class="fab-btn" (click)="openModal()">
+    <ion-icon name="add-outline" />
+  </button>
+</ion-content>
+
+@if (showModal()) {
+  <div class="modal-backdrop" (click)="closeModal()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <span class="modal-title">Nueva receta</span>
+        <button class="modal-close" (click)="closeModal()">
+          <ion-icon name="close-outline" />
+        </button>
+      </div>
+
+      <label class="modal-label">Nombre de la receta</label>
+      <input class="modal-input" type="text" placeholder="Ej: Pollo con ñoquis" [(ngModel)]="newName" />
+
+      <label class="modal-label">Para quién</label>
+      <select class="modal-select" [(ngModel)]="selectedMemberId">
+        <option value="">Todos</option>
+        @for (member of homeStore.familyProfiles(); track member.id) {
+          <option [value]="member.id">{{ member.name }}</option>
+        }
+      </select>
+
+      <div class="macro-inputs">
+        <div class="macro-field">
+          <label class="modal-label">Proteínas (g)</label>
+          <input class="modal-input small" type="number" min="0" [(ngModel)]="proteinsG" />
+        </div>
+        <div class="macro-field">
+          <label class="modal-label">Carbos (g)</label>
+          <input class="modal-input small" type="number" min="0" [(ngModel)]="carbsG" />
+        </div>
+        <div class="macro-field">
+          <label class="modal-label">Verduras (g)</label>
+          <input class="modal-input small" type="number" min="0" [(ngModel)]="vegetablesG" />
+        </div>
+      </div>
+
+      <button class="modal-submit" (click)="addRecipe()">Guardar receta</button>
+    </div>
+  </div>
+}
