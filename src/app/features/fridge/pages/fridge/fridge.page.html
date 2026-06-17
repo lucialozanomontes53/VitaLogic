@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text="" />
+    </ion-buttons>
+    <ion-title>VitaLogic</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="fridge-content">
+  <div class="page-body">
+
+    <h2 class="page-title">Bienvenido/a a tu nevera</h2>
+
+    <ion-searchbar
+      class="search-bar"
+      placeholder="Buscar"
+      [value]="searchQuery()"
+      (ionInput)="onSearch($any($event))"
+    />
+
+    <div class="filter-row">
+      <button class="filter-chip" [class.active]="isActive('proteina')"     (click)="toggleFilter('proteina')">Proteínas</button>
+      <button class="filter-chip" [class.active]="isActive('carbohidrato')" (click)="toggleFilter('carbohidrato')">Carbohidratos</button>
+      <button class="filter-chip" [class.active]="isActive('verdura')"      (click)="toggleFilter('verdura')">Verduras</button>
+    </div>
+
+    @if (store.loading()) {
+      <div class="center-spinner"><ion-spinner name="crescent" /></div>
+    } @else if (filteredIngredients().length === 0) {
+      <p class="empty-msg">No hay ingredientes. ¡Añade el primero!</p>
+    } @else {
+      <div class="ingredient-list">
+        @for (item of filteredIngredients(); track item.id) {
+          <div class="ingredient-item">
+            <span class="ingredient-dot" [class]="dotClass(item.category)"></span>
+            <span class="ingredient-name">{{ item.name }}</span>
+            <button class="delete-btn" (click)="remove(item.id, $event)">
+              <ion-icon name="trash-outline" />
+            </button>
+          </div>
+        }
+      </div>
+    }
+
+  </div>
+
+  <button class="fab-btn" (click)="openModal()">
+    <ion-icon name="add-outline" />
+  </button>
+</ion-content>
+
+@if (showModal()) {
+  <div class="modal-backdrop" (click)="closeModal()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <span class="modal-title">Añadir ingrediente</span>
+        <button class="modal-close" (click)="closeModal()">
+          <ion-icon name="close-outline" />
+        </button>
+      </div>
+
+      <label class="modal-label">Nombre</label>
+      <input
+        class="modal-input"
+        type="text"
+        placeholder="Ej: Pollo"
+        [(ngModel)]="newName"
+        (keyup.enter)="addIngredient()"
+      />
+
+      <label class="modal-label">Categoría</label>
+      <div class="cat-row">
+        <button class="cat-chip" [class.active]="newCategory === 'proteina'"     (click)="newCategory = 'proteina'">Proteína</button>
+        <button class="cat-chip" [class.active]="newCategory === 'carbohidrato'" (click)="newCategory = 'carbohidrato'">Carb.</button>
+        <button class="cat-chip" [class.active]="newCategory === 'verdura'"      (click)="newCategory = 'verdura'">Verdura</button>
+      </div>
+
+      <button class="modal-submit" (click)="addIngredient()">Añadir</button>
+    </div>
+  </div>
+}
