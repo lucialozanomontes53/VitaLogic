@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text="" />
+    </ion-buttons>
+    <ion-title>VitaLogic</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="shopping-content">
+  <div class="page-body">
+
+    <h2 class="page-title">Lista de la compra</h2>
+
+    <button class="add-product-btn" (click)="openModal()">+ Añadir producto</button>
+
+    @if (store.loading()) {
+      <div class="center-spinner"><ion-spinner name="crescent" /></div>
+    } @else if (store.items().length === 0) {
+      <p class="empty-msg">La lista está vacía. ¡Añade algo!</p>
+    } @else {
+      <div class="item-list">
+        @for (item of store.items(); track item.id) {
+          <div class="item-row" [class.checked]="item.checked" (click)="toggle(item.id)">
+            <span class="item-dot" [class]="dotClass(item.category)"></span>
+            <span class="item-name">{{ item.name }}</span>
+            <button class="delete-btn" (click)="remove(item.id, $event)">
+              <ion-icon name="trash-outline" />
+            </button>
+          </div>
+        }
+      </div>
+    }
+
+  </div>
+
+  <button class="fab-btn" (click)="openModal()">
+    <ion-icon name="add-outline" />
+  </button>
+</ion-content>
+
+@if (showModal()) {
+  <div class="modal-backdrop" (click)="closeModal()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <span class="modal-title">Añadir producto</span>
+        <button class="modal-close" (click)="closeModal()">
+          <ion-icon name="close-outline" />
+        </button>
+      </div>
+
+      <label class="modal-label">Nombre</label>
+      <input
+        class="modal-input"
+        type="text"
+        placeholder="Ej: Leche"
+        [(ngModel)]="newName"
+        (keyup.enter)="addItem()"
+      />
+
+      <label class="modal-label">Categoría</label>
+      <div class="cat-row">
+        <button class="cat-chip" [class.active]="newCategory === 'proteina'"     (click)="newCategory = 'proteina'">Proteína</button>
+        <button class="cat-chip" [class.active]="newCategory === 'carbohidrato'" (click)="newCategory = 'carbohidrato'">Carb.</button>
+        <button class="cat-chip" [class.active]="newCategory === 'verdura'"      (click)="newCategory = 'verdura'">Verdura</button>
+      </div>
+
+      <button class="modal-submit" (click)="addItem()">Añadir</button>
+    </div>
+  </div>
+}
