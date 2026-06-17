@@ -1,0 +1,55 @@
+<ion-content class="login-content">
+  <div class="login-wrapper">
+
+    <h1 class="brand-title">VitaLogic</h1>
+
+    <div class="form-card">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <div class="field-group">
+          <label class="field-label">Usuario</label>
+          <div class="input-wrapper">
+            <ion-input
+              type="email"
+              formControlName="email"
+              placeholder="Usuario"
+              autocomplete="email"
+              inputmode="email"
+            />
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Contraseña</label>
+          <div class="input-wrapper">
+            <ion-input
+              type="password"
+              formControlName="password"
+              placeholder="Contraseña"
+              autocomplete="current-password"
+            />
+          </div>
+        </div>
+
+        @if (error()) {
+          <p class="error-msg">{{ error() }}</p>
+        }
+
+        <ion-button
+          type="submit"
+          expand="block"
+          class="submit-btn"
+          [disabled]="form.invalid || loading()"
+        >
+          @if (loading()) {
+            <ion-spinner name="crescent" />
+          } @else {
+            Iniciar sesión
+          }
+        </ion-button>
+
+      </form>
+    </div>
+
+  </div>
+</ion-content>

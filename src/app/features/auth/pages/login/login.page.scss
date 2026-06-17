@@ -1,0 +1,78 @@
+.login-content {
+  --background: #ffffff;
+}
+
+.login-content::part(scroll) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 32px 24px;
+}
+
+.brand-title {
+  font-size: 36px;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--vl-navy);
+  margin: 0 0 48px;
+  letter-spacing: -0.5px;
+}
+
+.form-card {
+  width: 100%;
+  max-width: 360px;
+  border: 1.5px solid var(--vl-border);
+  border-radius: 16px;
+  padding: 28px 20px;
+}
+
+.field-group {
+  margin-bottom: 16px;
+}
+
+.field-label {
+  display: block;
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 8px;
+  font-weight: 400;
+}
+
+.input-wrapper {
+  border: 1.5px solid var(--vl-border);
+  border-radius: 10px;
+  overflow: hidden;
+
+  ion-input {
+    --background: #ffffff;
+    --padding-start: 14px;
+    --padding-end: 14px;
+    --placeholder-color: #ABABAB;
+    --color: #333;
+    font-size: 15px;
+  }
+}
+
+.error-msg {
+  color: #E53E3E;
+  font-size: 13px;
+  margin: 4px 0 8px;
+}
+
+.submit-btn {
+  --background: var(--vl-navy);
+  --background-activated: #142850;
+  --border-radius: 24px;
+  --box-shadow: none;
+  margin-top: 12px;
+  font-size: 16px;
+  font-weight: 500;
+}

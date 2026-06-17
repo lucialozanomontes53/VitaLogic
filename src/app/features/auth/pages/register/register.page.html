@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Crear cuenta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <ion-item>
+      <ion-input
+        type="text"
+        formControlName="fullName"
+        label="Nombre completo"
+        labelPlacement="floating"
+        autocomplete="name"
+      />
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        type="email"
+        formControlName="email"
+        label="Email"
+        labelPlacement="floating"
+        autocomplete="email"
+        inputmode="email"
+      />
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        type="password"
+        formControlName="password"
+        label="Contraseña"
+        labelPlacement="floating"
+        autocomplete="new-password"
+      />
+    </ion-item>
+
+    @if (error()) {
+      <ion-note color="danger" class="ion-padding-start">{{ error() }}</ion-note>
+    }
+
+    <ion-button
+      type="submit"
+      expand="block"
+      class="ion-margin-top"
+      [disabled]="form.invalid || loading()"
+    >
+      @if (loading()) {
+        <ion-spinner name="crescent" />
+      } @else {
+        Crear cuenta
+      }
+    </ion-button>
+
+  </form>
+
+  <ion-button fill="clear" expand="block" [routerLink]="['/auth/login']">
+    ¿Ya tienes cuenta? Inicia sesión
+  </ion-button>
+</ion-content>
